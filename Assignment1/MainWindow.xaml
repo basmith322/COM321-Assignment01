@@ -1,0 +1,116 @@
+﻿<Window x:Class="Assignment1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assignment1"
+        mc:Ignorable="d"
+        Title="Movie Database" SizeToContent="WidthAndHeight">
+    <Border Margin="5">
+        <!--Top Panel menu options-->
+        <DockPanel Visibility="Visible" >
+            <Menu DockPanel.Dock="Top" >
+                <MenuItem x:Name="File" Header="File">
+                    <MenuItem x:Name="FileMenuNew" Header="New" />
+                    <MenuItem x:Name="FileMenuOpen" Header="Open" />
+                    <MenuItem x:Name="FileMenuSave" Header="Save" />
+                    <Separator />
+                    <MenuItem x:Name="FileMenuExit" Header="Exit" />
+                </MenuItem>
+                <MenuItem x:Name="Edit" Header="Edit">
+                    <MenuItem x:Name="EditMenuCreate" Header="Create" />
+                    <Separator />
+                    <MenuItem x:Name="EditMenuEdit" Header="Edit" Click="EditMenuEdit_Click" />
+                    <MenuItem x:Name="EditMenuDelete" Header="Delete" />
+                </MenuItem>
+                <MenuItem x:Name="View" Header="View" >
+                    <MenuItem x:Name="ViewMenuTitle" Header="By Title" />
+                    <MenuItem x:Name="ViewMenuYear" Header="By Year"/>
+                    <MenuItem x:Name="ViewMenuDuration" Header="By Durartion" />
+                </MenuItem>
+                <MenuItem x:Name="Help" Header="Help" >
+                    <MenuItem x:Name="HelpMenuAbout" Header="About" Click="HelpMenuAbout_Click"/>
+                </MenuItem>
+            </Menu>
+            <!--Main Form Window-->
+            <WrapPanel>
+                <StackPanel>
+                    <Label x:Name="lblTitle" Content="Title" Margin="3" />
+                    <TextBox x:Name="txtTitle" Margin="3" IsReadOnly="True" />
+
+                    <!--Grid for duration and year labels and textboxes-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lblDuration" Content="Duration (Mins)" Margin="3"  Grid.Column="0" Grid.Row="0"/>
+                        <Label x:Name="lblYear" Content="Year" Margin="3" Grid.Column="1" Grid.Row="0"/>
+                        <TextBox x:Name="txtDuration" Margin="3" IsReadOnly="True" Grid.Column="0" Grid.Row="1"/>
+                        <TextBox x:Name="txtYear" Margin="3" IsReadOnly="True" Grid.Column="1" Grid.Row="1"/>
+                    </Grid>
+
+                    <!--Grid for budget and rating selector -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <Label x:Name="lblBudget" Content="Budget (Million $)" Margin="3"  Grid.Column="0"  />
+                            <TextBox x:Name="txtBudget" Margin="3" IsReadOnly="True" Grid.Column="0" />
+                        </StackPanel>
+                        <local:Rating x:Name="RatingSelector" Grid.Column="2" IsEnabled="False" />
+                    </Grid>
+
+                    <!--Labels and controls for Director, genre and cast -->
+                    <Label x:Name="lblDirector" Content="Director" Margin="3" />
+                    <TextBox x:Name="txtDirector" Margin="3" IsReadOnly="True" />
+                    <local:Genre x:Name="GenreSelector" IsEnabled="False" />
+                    <Label x:Name="lblMoviePosterUrl" Content="Movie Poster URL" Margin="3" Visibility="Collapsed"/>
+                    <TextBox x:Name="txtMoviePosterUrl" Margin="3" Visibility="Collapsed"/>
+                    <Label x:Name="Cast" Content="Cast" Margin="3" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtCast" Margin="3" Grid.Column="0" Visibility="Collapsed"/>
+                        <Button x:Name="btnAdd" Content="Add" Margin="3" Visibility="Collapsed" Grid.Column="1"/>
+                        <Button x:Name="btnDelete" Content="Delete" Margin="3" Visibility="Collapsed" Grid.Column="2" />
+                    </Grid>
+                    <ListBox Margin="3" IsEnabled="False">
+                        <Label x:Name="lblJT" Content="John Travolta" />
+                    </ListBox>
+
+                    <!--Grid for Buttons -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnFirst" Content="First" Margin="3" Grid.Column="0" />
+                        <Button x:Name="btnPrevious" Content="Previous" Margin="3" Grid.Column="1" />
+                        <Button x:Name="btnNext" Content="Next" Margin="3" Grid.Column="2" />
+                        <Button x:Name="btnCancel" Content="Cancel" Margin="3" Grid.Column="2" Visibility="Collapsed" Click="btnCancel_Click" />
+                        <Button x:Name="btnLast" Content="Last" Margin="3" Grid.Column="3" />
+                        <Button x:Name="btnSave" Content="Save" Margin="3" Grid.Column="3" Visibility="Collapsed"/>
+                    </Grid>
+                </StackPanel>
+
+                <!--Grid for movie poster (nb sits outside the main stackpanel so it can move within the Wrap panel only-->
+                <Grid>
+                    <Label x:Name="lblPoster" Content="Poster" Margin="3" />
+                    <Image x:Name="posterImage" Height="350" Width="200" Margin="3" />
+                </Grid>
+            </WrapPanel>
+        </DockPanel>
+    </Border>
+</Window>
