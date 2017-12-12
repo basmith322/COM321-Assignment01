@@ -29,6 +29,7 @@ namespace MovieDatabaseTestProject
                 Genres = new List<Genre> { Genre.Comedy}
             };
         }
+        //example
 
         [TestMethod]
         public void TestCreateMovie()

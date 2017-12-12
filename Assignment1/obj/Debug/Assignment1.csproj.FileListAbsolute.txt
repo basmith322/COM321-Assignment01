@@ -40,3 +40,25 @@ C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\ob
 C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.Properties.Resources.resources
 C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.csproj.GenerateResource.Cache
 C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.csproj.CoreCompileInputs.cache
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\bin\Debug\Assignment1.exe.config
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\bin\Debug\Assignment1.exe
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\bin\Debug\Assignment1.pdb
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.csprojResolveAssemblyReference.cache
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\UI Elements\Genre.g.cs
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\UI Elements\MainWindow.g.cs
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\UI Elements\Rating.g.cs
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\App.g.cs
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1_MarkupCompile.cache
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1_MarkupCompile.lref
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\UI Elements\Genre.baml
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\UI Elements\MainWindow.baml
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\UI Elements\Rating.baml
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.g.resources
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.Properties.Resources.resources
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.csproj.GenerateResource.Cache
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.csproj.CoreCompileInputs.cache
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.exe
+C:\Users\csf16smb\Documents\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.pdb
