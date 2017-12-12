@@ -8,7 +8,7 @@ namespace Assignment1.Models
 {
     public class Database
     {
-        private List<Movie> db; // list of movies in the database
+        public List<Movie> db; // list of movies in the database
 
         private int _index; // position of current movie in the database 
 

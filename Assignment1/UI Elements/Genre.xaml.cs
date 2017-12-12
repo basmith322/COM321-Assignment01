@@ -24,5 +24,38 @@ namespace Assignment1
         {
             InitializeComponent();
         }
+
+        public List<Models.Genre> GenreSelected
+        {
+            get
+            {
+                var genres = new List<Models.Genre>();
+                if (chkComedy.IsChecked.Value) genres.Add(Models.Genre.Comedy);
+                else if (chkRomance.IsChecked.Value) genres.Add(Models.Genre.Romance);
+                else if (chkAction.IsChecked.Value) genres.Add(Models.Genre.Action);
+                else if (chkThriller.IsChecked.Value) genres.Add(Models.Genre.Thriller);
+                else if (chkFamily.IsChecked.Value) genres.Add(Models.Genre.Family);
+                else if (chkHorror.IsChecked.Value) genres.Add(Models.Genre.Horror);
+                else if (chkWestern.IsChecked.Value) genres.Add(Models.Genre.Western);
+                else if (chkSciFi.IsChecked.Value) genres.Add(Models.Genre.SciFi);
+                else if (chkWar.IsChecked.Value) genres.Add(Models.Genre.War);
+                return genres;
+
+            }
+            set
+            {
+                chkComedy.IsChecked = value.Contains(Models.Genre.Comedy) ? true : false;
+                chkRomance.IsChecked = value.Contains(Models.Genre.Romance) ? true : false;
+                chkAction.IsChecked = value.Contains(Models.Genre.Action) ? true : false;
+                chkThriller.IsChecked = value.Contains(Models.Genre.Thriller) ? true : false;
+                chkFamily.IsChecked = value.Contains(Models.Genre.Family) ? true : false;
+                chkHorror.IsChecked = value.Contains(Models.Genre.Horror) ? true : false;
+                chkWestern.IsChecked = value.Contains(Models.Genre.Western) ? true : false;
+                chkSciFi.IsChecked = value.Contains(Models.Genre.SciFi) ? true : false;
+                chkWar.IsChecked = value.Contains(Models.Genre.War) ? true : false;
+            }
+
+        }
     }
 }
+

@@ -12,14 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assignment1.Models;
+using Microsoft.Win32;
+
 
 namespace Assignment1
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+    //enum WindowMode { View, Create, Edit }
+
     public partial class MainWindow : Window
     {
+        public Database db;
+        private Movie mov;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,15 +37,33 @@ namespace Assignment1
             var uri = new Uri(path, UriKind.Absolute);
 
             posterImage.Source = new BitmapImage(uri);
+
         }
 
         void UpdateModelFromUI()
         {
+            db.Get().Title = txtTitle.Text;
+            db.Get().Year = Convert.ToInt32(txtYear.Text);
+            db.Get().Director = txtDirector.Text;
+            db.Get().Duration = Convert.ToInt32(txtDuration.Text);
+            db.Get().Budget = Convert.ToDouble(txtDuration.Text);
+            db.Get().PosterURL = txtMoviePosterUrl.Text;
 
-        }
+            //NEEDS FIXED- NEED TO DO RATINGS GENRE AND ACTORS
+            // actors
+            //db.Get().Genres = Genre.GenreSelected;
+            //db.Get().Rating =   Rating.MovieRating.RatingValue;
+        } 
+    
 
         void UpdateUIFromModel()
         {
+            txtTitle.Text = db.Get().Title;
+            txtYear.Text = db.Get().Year.ToString();
+            txtDirector.Text = db.Get().Duration.ToString();
+            txtBudget.Text = db.Get().Budget.ToString();
+
+            //NEED TO DO RATING, GENRE AND ACTORS
 
         }
 
@@ -110,6 +138,20 @@ namespace Assignment1
         private void HelpMenuAbout_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Movie Database System\nUI Designed by Benjamin Smith\n© 2017", "About");
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+    private void btnLast_Click(object sender, RoutedEventArgs e)
+        {
+            if (db.Last()) 
+            { 
+                //UpdateUIFromModel(db.Get());
+                UpdateModelFromUI();
+            }
         }
     }
 }

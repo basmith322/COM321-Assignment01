@@ -98,9 +98,9 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="btnFirst" Content="First" Margin="3" Grid.Column="0" />
                         <Button x:Name="btnPrevious" Content="Previous" Margin="3" Grid.Column="1" />
-                        <Button x:Name="btnNext" Content="Next" Margin="3" Grid.Column="2" />
+                        <Button x:Name="btnNext" Content="Next" Margin="3" Grid.Column="2" Click="btnNext_Click" />
                         <Button x:Name="btnCancel" Content="Cancel" Margin="3" Grid.Column="2" Visibility="Collapsed" Click="btnCancel_Click" />
-                        <Button x:Name="btnLast" Content="Last" Margin="3" Grid.Column="3" />
+                        <Button x:Name="btnLast" Content="Last" Margin="3" Grid.Column="3" Click="btnLast_Click" />
                         <Button x:Name="btnSave" Content="Save" Margin="3" Grid.Column="3" Visibility="Collapsed"/>
                     </Grid>
                 </StackPanel>
