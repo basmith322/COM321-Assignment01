@@ -9,10 +9,8 @@ namespace Assignment1.Models
 
     public class Movie
     {
-        // declare the movie properties and a constructor to initialise a blank movie
-
-        //Movie m = new Movie();
-     
+        #region GettersAndSetters
+        //Getters and Setters for movie
         public string Title { get; set; }
         public int Year { get; set; }
         public string Director { get; set; }
@@ -22,21 +20,24 @@ namespace Assignment1.Models
         public string PosterURL { get; set; }
         public List<string> Actors { get; set; }
         public List<Genre> Genres { get; set; }
+        #endregion
 
-
-            public Movie()
-                 {
-                   Title = "";
-                   Year = 0;
-                   Director = "";
-                   Duration = 0;
-                   Budget = 0.00;
-                   Rating = 0;
-                   PosterURL = "";
-                   Actors = new List<string> ();
-                   Genres = new List<Genre>();
-                 }
-              }
-            }
+        #region Constructor
+        //Default constructor for movie
+        public Movie()
+        {
+            Title = "";
+            Year = 0;
+            Director = "";
+            Duration = 0;
+            Budget = 0.00;
+            Rating = 0;
+            PosterURL = "";
+            Actors = new List<string>();
+            Genres = new List<Genre>();
+        }
+        #endregion
+    }
+}
 
 

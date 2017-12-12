@@ -8,6 +8,7 @@ namespace Assignment1.Models
 {
     public class Database
     {
+        #region DatabaseInitializations
         public List<Movie> db; // list of movies in the database
 
         private int _index; // position of current movie in the database 
@@ -38,7 +39,9 @@ namespace Assignment1.Models
                 return _index;
             }
         }
+        #endregion
 
+        #region DatabaseModifierFunctions
         // Add a movie to current position in database
         public void Add(Movie m)
         {
@@ -80,7 +83,9 @@ namespace Assignment1.Models
             db.Clear();
             _index = -1;
         }
+        #endregion
 
+        #region NavigationButtonFunctions
         // Move index position to first movie (0)
         // return true if index update was possible, false otherwise
         public bool First()
@@ -88,21 +93,6 @@ namespace Assignment1.Models
             if (db.Count > 0)
             {
                 _index = 0;
-                return true;
-            }
-
-            return false;
-        }
-
-        // Move index position to last movie
-        // true if index update was possible, false otherwise</returns>
-        public bool Last()
-        {
-            //_index = db.Count - 1;
-
-            if (db.Count > 0)
-            {
-                _index = db.Count - 1;
                 return true;
             }
 
@@ -134,7 +124,24 @@ namespace Assignment1.Models
 
             return false;
         }
+        // Move index position to last movie
+        // true if index update was possible, false otherwise</returns>
+        public bool Last()
+        {
+            //_index = db.Count - 1;
 
+            if (db.Count > 0)
+            {
+                _index = db.Count - 1;
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region LoadSaveFunctions
         // Load movies from a json file and set index to first record
         public void Load(string file)
         {
@@ -151,30 +158,35 @@ namespace Assignment1.Models
             var json = JsonConvert.SerializeObject(db);
             File.WriteAllText(file, json);
         }
+        #endregion
+
+        #region OrderByFunctions
 
         // Following methods update the List of movies (db) to the specified order
 
-        // order the database by year of movie
+        // order by year of movie
         public void OrderByYear()
         {
             db = db.OrderBy(x => x.Year).ToList();
         }
 
-        // order the database by title of movie (ascending)
+        // order by title of movie (ascending)
         public void OrderByTitle()
         {
             db = db.OrderBy(x => x.Title).ToList();
         }
 
-        // order the database by budget of movie (ascending)
+        // order by budget of movie (ascending)
         public void OrderByBudget()
         {
             db = db.OrderBy(x => x.Budget).ToList();
         }
 
+        // order by duration of movie (ascending)
         public void OrderByDuration()
         {
             db = db.OrderBy(x => x.Duration).ToList();
         }
     }
+    #endregion
 }

@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using Assignment1.Models;
 using Microsoft.Win32;
 
-
 namespace Assignment1
 {
 
@@ -34,8 +33,9 @@ namespace Assignment1
         #region FileMenuButtons
         private void FileMenuNew_Click(object sender, RoutedEventArgs e)
         {
-
+            db.clear();
         }
+
         private void FileMenuOpen_Click(object sender, RoutedEventArgs e)
         {
             var openFile = new OpenFileDialog()
@@ -227,28 +227,30 @@ namespace Assignment1
         }
         #endregion
 
-        #region FormButtons
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            BrowseMode();
-        }
+        #region NavigationButtons
 
+        private void btnFirst_Click(object sender, RoutedEventArgs e)
+        {
+            db.First();
+        }
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            db.Next();
+        }
 
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            db.Prev();
         }
 
         private void btnLast_Click(object sender, RoutedEventArgs e)
         {
 
-            //if (db.Last()) 
-            //{ 
-            //    //UpdateUIFromModel(db.Get());
-            //    UpdateModelFromUI();
-            UpdateNavigation();
-            //}
+            db.Last();
         }
+        #endregion
 
+        #region ModifierButtons
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             PosterImage();
@@ -256,22 +258,17 @@ namespace Assignment1
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateUIFromModel();
         }
 
-        private void btnFirst_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
-        {
-
+            BrowseMode();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateModelFromUI();
         }
         #endregion
 
@@ -304,6 +301,5 @@ namespace Assignment1
             GenreSelector.chkWestern.IsChecked = false;
         }
         #endregion
-
     }
 }
