@@ -18,39 +18,108 @@ using Microsoft.Win32;
 
 namespace Assignment1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
-
-    //enum WindowMode { View, Create, Edit }
 
     public partial class MainWindow : Window
     {
         public Database db;
-        private Movie mov;
 
+        #region MainWindow
         public MainWindow()
         {
             InitializeComponent();
 
         }
+        #endregion
 
-        void PosterImage()
+        #region FileMenuButtons
+        private void FileMenuNew_Click(object sender, RoutedEventArgs e)
         {
-            var path = txtMoviePosterUrl.Text;
-            try
+
+        }
+        private void FileMenuOpen_Click(object sender, RoutedEventArgs e)
+        {
+            var openFile = new OpenFileDialog()
             {
-                var uri = new Uri(path, UriKind.Absolute);
-                posterImage.Source = new BitmapImage(uri);
-            }
-            catch (UriFormatException e)
+                Filter = "json files|*.json",
+                Title = "File to open"
+            };
+            if (openFile.ShowDialog() == true)
             {
-                posterImage.Source = null;
+                var file = openFile.FileName;
+                db.Load(file);
             }
-            
         }
 
+        private void FileMenuSave_Click(object sender, RoutedEventArgs e)
+        {
+            var saveFile = new SaveFileDialog()
+            {
+                Filter = "json files|*.json",
+                Title = "...File to save"
+            };
+            if (saveFile.ShowDialog() == true)
+            {
+                var file = saveFile.FileName;
+                if (file != null)
+                {
+                    db.Save(file);
+                }
+                else if (file == null)
+                {
+                    MessageBox.Show("Cannot save an empty file");
+                }
+            }
+        }
+
+        private void FileMenuExit_Click(object sender, RoutedEventArgs e)
+        {
+            System.Environment.Exit(1);
+        }
+        #endregion
+
+        #region EditMenuButtons
+        private void EditMenuEdit_Click(object sender, RoutedEventArgs e)
+        {
+            EditMode();
+        }
+
+        private void EditMenuCreate_Click(object sender, RoutedEventArgs e)
+        {
+            CreateMode();
+        }
+
+        private void EditMenuDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region ViewMenuButtons
+        private void ViewMenuTitle_Click(object sender, RoutedEventArgs e)
+        {
+            db.OrderByTitle();
+        }
+
+        private void ViewMenuYear_Click(object sender, RoutedEventArgs e)
+        {
+            db.OrderByYear();
+        }
+
+        private void ViewMenuDuration_Click(object sender, RoutedEventArgs e)
+        {
+            db.OrderByDuration();
+        }
+        #endregion
+
+        #region HelpMenuButtons
+        private void HelpMenuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Movie Database System\nUI Designed by Benjamin Smith\n© 2017", "About");
+        }
+        #endregion
+
+        #region MVVM Updaters
         void UpdateModelFromUI()
         {
             db.Get().Title = txtTitle.Text;
@@ -64,8 +133,8 @@ namespace Assignment1
             // actors
             //db.Get().Genres = Genre.GenreSelected;
             //db.Get().Rating =   Rating.MovieRating.RatingValue;
-        } 
-    
+        }
+
 
         void UpdateUIFromModel()
         {
@@ -79,11 +148,13 @@ namespace Assignment1
         }
 
         private void UpdateNavigation()
-        { 
-            
-        }
+        {
 
-        enum WindowMode { Browse, Create, Edit}
+        }
+        #endregion
+
+        #region WindowModes
+        enum WindowMode { Browse, Create, Edit }
         void BrowseMode()
         {
             btnFirst.Visibility = Visibility.Visible;
@@ -113,7 +184,7 @@ namespace Assignment1
             Application.Current.MainWindow.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
-         public void EditMode()
+        public void EditMode()
         {
             btnFirst.Visibility = Visibility.Hidden;
             btnPrevious.Visibility = Visibility.Hidden;
@@ -154,6 +225,71 @@ namespace Assignment1
             ClearGenre();
 
         }
+        #endregion
+
+        #region FormButtons
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            BrowseMode();
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLast_Click(object sender, RoutedEventArgs e)
+        {
+
+            //if (db.Last()) 
+            //{ 
+            //    //UpdateUIFromModel(db.Get());
+            //    UpdateModelFromUI();
+            UpdateNavigation();
+            //}
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            PosterImage();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnFirst_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region Other Functions
+        void PosterImage()
+        {
+            var path = txtMoviePosterUrl.Text;
+            try
+            {
+                var uri = new Uri(path, UriKind.Absolute);
+                posterImage.Source = new BitmapImage(uri);
+            }
+            catch (UriFormatException e)
+            {
+                posterImage.Source = null;
+            }
+
+        }
 
         public void ClearGenre()
         {
@@ -167,117 +303,7 @@ namespace Assignment1
             GenreSelector.chkWar.IsChecked = false;
             GenreSelector.chkWestern.IsChecked = false;
         }
+        #endregion
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            BrowseMode();
-        }
-
-        private void EditMenuEdit_Click(object sender, RoutedEventArgs e)
-        {
-            EditMode();
-        }
-
-        private void FileMenuNew_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void HelpMenuAbout_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Movie Database System\nUI Designed by Benjamin Smith\n© 2017", "About");
-        }
-
-        private void btnNext_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
-
-    private void btnLast_Click(object sender, RoutedEventArgs e)
-        {
-
-            //if (db.Last()) 
-            //{ 
-            //    //UpdateUIFromModel(db.Get());
-            //    UpdateModelFromUI();
-                UpdateNavigation();
-            //}
-        }
-
-
-        private void FileMenuOpen_Click(object sender, RoutedEventArgs e)
-        {
-            var openFile = new OpenFileDialog()
-            {
-                Filter = "json files|*.json",
-                Title = "File to open"
-            };
-            if (openFile.ShowDialog() == true)
-            {
-                var file = openFile.FileName;
-                db.Load(file);
-            }
-        }
-
-        private void FileMenuSave_Click(object sender, RoutedEventArgs e)
-        {
-            var saveFile = new SaveFileDialog()
-            {
-                Filter = "json files|*.json",
-                Title = "...File to save"
-            };
-            if (saveFile.ShowDialog() == true)
-            {
-                var file = saveFile.FileName;
-                if (file != null)
-                {
-                    db.Save(file);
-                }
-                else if (file == null)
-                {
-                    MessageBox.Show("Cannot save an empty file");
-                }
-            }
-        }
-
-        private void FileMenuExit_Click(object sender, RoutedEventArgs e)
-        {
-            System.Environment.Exit(1);
-        }
-
-        private void EditMenuCreate_Click(object sender, RoutedEventArgs e)
-        {
-            CreateMode();
-        }
-
-        private void EditMenuDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ViewMenuTitle_Click(object sender, RoutedEventArgs e)
-        {
-            db.OrderByTitle();
-        }
-
-        private void ViewMenuYear_Click(object sender, RoutedEventArgs e)
-        {
-            db.OrderByYear();
-        }
-
-        private void ViewMenuDuration_Click(object sender, RoutedEventArgs e)
-        {
-            db.OrderByDuration();
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            PosterImage();
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

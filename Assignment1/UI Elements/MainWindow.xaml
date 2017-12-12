@@ -32,7 +32,8 @@
                     <MenuItem x:Name="HelpMenuAbout" Header="About" Click="HelpMenuAbout_Click"/>
                 </MenuItem>
             </Menu>
-            <!--Main Form Window-->
+            
+            <!--Main Form Window-->    
             <WrapPanel>
                 <StackPanel>
                     <Label x:Name="lblTitle" Content="Title" Margin="3" />
@@ -96,12 +97,12 @@
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="btnFirst" Content="First" Margin="3" Grid.Column="0" />
-                        <Button x:Name="btnPrevious" Content="Previous" Margin="3" Grid.Column="1" />
+                        <Button x:Name="btnFirst" Content="First" Margin="3" Grid.Column="0" Click="btnFirst_Click" />
+                        <Button x:Name="btnPrevious" Content="Previous" Margin="3" Grid.Column="1" Click="btnPrevious_Click" />
                         <Button x:Name="btnNext" Content="Next" Margin="3" Grid.Column="2" Click="btnNext_Click" />
                         <Button x:Name="btnCancel" Content="Cancel" Margin="3" Grid.Column="2" Visibility="Collapsed" Click="btnCancel_Click" />
                         <Button x:Name="btnLast" Content="Last" Margin="3" Grid.Column="3" Click="btnLast_Click" />
-                        <Button x:Name="btnSave" Content="Save" Margin="3" Grid.Column="3" Visibility="Collapsed"/>
+                        <Button x:Name="btnSave" Content="Save" Margin="3" Grid.Column="3" Visibility="Collapsed" Click="btnSave_Click"/>
                     </Grid>
                 </StackPanel>
 
