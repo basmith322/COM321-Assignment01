@@ -138,13 +138,18 @@ namespace Assignment1.Models
         // Load movies from a json file and set index to first record
         public void Load(string file)
         {
-
+            clear();
+            string json = file.ReadAllText(file);
+            var m = JsonConvert.DeserializeObject<List<Movie>>(json);
+            db = m;
+            _index = 0;
         }
 
         // Save movies to a Json file
         public void Save(string file)
         {
-
+            var json = JsonConvert.SerializeObject(db);
+            File.WriteAllText(file, json);
         }
 
         // Following methods update the List of movies (db) to the specified order
@@ -152,24 +157,24 @@ namespace Assignment1.Models
         // order the database by year of movie
         public void OrderByYear()
         {
-
+            db = db.OrderBy(x => x.Year).ToList();
         }
 
         // order the database by title of movie (ascending)
         public void OrderByTitle()
         {
-
+            db = db.OrderBy(x => x.Title).ToList();
         }
 
         // order the database by budget of movie (ascending)
         public void OrderByBudget()
         {
-
+            db = db.OrderBy(x => x.Budget).ToList();
         }
 
         public void OrderByDuration()
         {
-
+            db = db.OrderBy(x => x.Duration).ToList();
         }
     }
 }
