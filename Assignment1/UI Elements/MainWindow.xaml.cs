@@ -78,13 +78,12 @@ namespace Assignment1
 
         }
 
-        void UpdateNavigation()
-        {
-            
-                btnNext.IsEnabled = false;
-                btnLast.IsEnabled = false;
+        private void UpdateNavigation()
+        { 
             
         }
+
+        enum WindowMode { Browse, Create, Edit}
         void BrowseMode()
         {
             btnFirst.Visibility = Visibility.Visible;
@@ -181,7 +180,7 @@ namespace Assignment1
 
         private void FileMenuNew_Click(object sender, RoutedEventArgs e)
         {
-            CreateMode();
+            
         }
 
         private void HelpMenuAbout_Click(object sender, RoutedEventArgs e)
@@ -230,7 +229,14 @@ namespace Assignment1
             if (saveFile.ShowDialog() == true)
             {
                 var file = saveFile.FileName;
-                db.Save(file);
+                if (file != null)
+                {
+                    db.Save(file);
+                }
+                else if (file == null)
+                {
+                    MessageBox.Show("Cannot save an empty file");
+                }
             }
         }
 
@@ -241,7 +247,7 @@ namespace Assignment1
 
         private void EditMenuCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateMode();
         }
 
         private void EditMenuDelete_Click(object sender, RoutedEventArgs e)

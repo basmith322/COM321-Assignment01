@@ -36,20 +36,21 @@ namespace MovieDatabaseTestProject
         {
             // verify the movie was created by checking that each attribute value was set
             // e.g.   Assert.AreEqual(m.Title, "The title of the test movie");
+            {
+                Movie mov = new Movie();
 
-            Movie m = new Movie();
-            //{ Title = "MovieOne", Year = 2017, Duration = 150 };
-        
-            Assert.AreEqual(m.Title, "MovieOne");
-            Assert.AreEqual(m.Year, 2016);
-            Assert.AreEqual(m.Duration, 185);
-            Assert.AreEqual(m.Director, "Steven Spielberg");
-            Assert.AreEqual(m.Budget, 143.6);
-            Assert.AreEqual(m.Rating, 3);
-            Assert.AreEqual(m.PosterURL, "www.google.com");
-            Assert.AreEqual(m.Actors.Contains("Jonah Hill"),("James Cordon"),("Emily Blunt"));
-            Assert.AreEqual(m.Genres, Genre.Comedy );
-            db.Add(m);
+                Assert.AreEqual(m.Title, "MovieOne");
+                Assert.AreEqual(m.Year, 2017);
+                Assert.AreEqual(m.Duration, 150);
+                Assert.AreEqual(m.Director, "Robert Hill");
+                Assert.AreEqual(m.Budget, 143.6);
+                Assert.AreEqual(m.Rating, 3);
+                Assert.AreEqual(m.PosterURL, "www.google.com");
+                Assert.IsTrue(m.Actors.Contains("Jonah Hill"));
+                Assert.IsTrue(m.Actors.Contains("James Cordon"));
+                Assert.IsTrue(m.Actors.Contains("Emily Blunt"));
+                Assert.IsTrue(m.Genres.Contains(Genre.Comedy));
+            }
         }
 
         [TestMethod]
@@ -60,11 +61,11 @@ namespace MovieDatabaseTestProject
            
 
             var db = new Database();
-            var m3 = new Movie() { Title = "Movie 3", Year = 2015, Budget = 120 };
+            var m = new Movie() { Title = "Movie 3", Year = 2015, Budget = 120 };
             db.Add(m);
             //db.Index = db.Count - 1;
-            db.Update(m3);
-            Assert.AreEqual(m3.Year, m.Year);
+            db.Update(m);
+            Assert.AreEqual(m.Year, m.Year);
 
         }
     }
