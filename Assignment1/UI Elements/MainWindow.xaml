@@ -11,22 +11,22 @@
         <DockPanel Visibility="Visible" >
             <Menu DockPanel.Dock="Top" >
                 <MenuItem x:Name="File" Header="File">
-                    <MenuItem x:Name="FileMenuNew" Header="New" />
-                    <MenuItem x:Name="FileMenuOpen" Header="Open" />
-                    <MenuItem x:Name="FileMenuSave" Header="Save" />
+                    <MenuItem x:Name="FileMenuNew" Header="New" Click="FileMenuNew_Click" />
+                    <MenuItem x:Name="FileMenuOpen" Header="Open" Click="FileMenuOpen_Click" />
+                    <MenuItem x:Name="FileMenuSave" Header="Save" Click="FileMenuSave_Click"/>
                     <Separator />
-                    <MenuItem x:Name="FileMenuExit" Header="Exit" />
+                    <MenuItem x:Name="FileMenuExit" Header="Exit" Click="FileMenuExit_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="Edit" Header="Edit">
-                    <MenuItem x:Name="EditMenuCreate" Header="Create" />
+                    <MenuItem x:Name="EditMenuCreate" Header="Create" Click="EditMenuCreate_Click"/>
                     <Separator />
                     <MenuItem x:Name="EditMenuEdit" Header="Edit" Click="EditMenuEdit_Click" />
-                    <MenuItem x:Name="EditMenuDelete" Header="Delete" />
+                    <MenuItem x:Name="EditMenuDelete" Header="Delete" Click="EditMenuDelete_Click" />
                 </MenuItem>
                 <MenuItem x:Name="View" Header="View" >
-                    <MenuItem x:Name="ViewMenuTitle" Header="By Title" />
-                    <MenuItem x:Name="ViewMenuYear" Header="By Year"/>
-                    <MenuItem x:Name="ViewMenuDuration" Header="By Durartion" />
+                    <MenuItem x:Name="ViewMenuTitle" Header="By Title" Click="ViewMenuTitle_Click" />
+                    <MenuItem x:Name="ViewMenuYear" Header="By Year" Click="ViewMenuYear_Click"/>
+                    <MenuItem x:Name="ViewMenuDuration" Header="By Durartion" Click="ViewMenuDuration_Click" />
                 </MenuItem>
                 <MenuItem x:Name="Help" Header="Help" >
                     <MenuItem x:Name="HelpMenuAbout" Header="About" Click="HelpMenuAbout_Click"/>
@@ -81,11 +81,11 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="txtCast" Margin="3" Grid.Column="0" Visibility="Collapsed"/>
-                        <Button x:Name="btnAdd" Content="Add" Margin="3" Visibility="Collapsed" Grid.Column="1"/>
-                        <Button x:Name="btnDelete" Content="Delete" Margin="3" Visibility="Collapsed" Grid.Column="2" />
+                        <Button x:Name="btnAdd" Content="Add" Margin="3" Visibility="Collapsed" Grid.Column="1" Click="btnAdd_Click"/>
+                        <Button x:Name="btnDelete" Content="Delete" Margin="3" Visibility="Collapsed" Grid.Column="2" Click="btnDelete_Click" />
                     </Grid>
-                    <ListBox Margin="3" IsEnabled="False">
-                        <Label x:Name="lblJT" Content="John Travolta" />
+                    <ListBox x:Name="lstCast" Margin="3" IsEnabled="False">
+                        
                     </ListBox>
 
                     <!--Grid for Buttons -->

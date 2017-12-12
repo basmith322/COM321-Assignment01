@@ -139,7 +139,7 @@ namespace Assignment1.Models
         public void Load(string file)
         {
             clear();
-            string json = file.ReadAllText(file);
+            string json = File.ReadAllText(file);
             var m = JsonConvert.DeserializeObject<List<Movie>>(json);
             db = m;
             _index = 0;
