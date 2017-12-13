@@ -26,7 +26,7 @@ namespace MovieDatabaseTestProject
                 Rating = 3,
                 PosterURL = "www.google.com",
                 Actors = new List<String> {"Jonah Hill", "James Cordon", "Emily Blunt"},
-                Genres = new List<Genre> { Genre.Comedy}
+                Genres = new List<Movie.Genre> { Movie.Genre.Comedy}
             };
         }
         //example
@@ -49,7 +49,7 @@ namespace MovieDatabaseTestProject
                 Assert.IsTrue(m.Actors.Contains("Jonah Hill"));
                 Assert.IsTrue(m.Actors.Contains("James Cordon"));
                 Assert.IsTrue(m.Actors.Contains("Emily Blunt"));
-                Assert.IsTrue(m.Genres.Contains(Genre.Comedy));
+                Assert.IsTrue(m.Genres.Contains(Movie.Genre.Comedy));
             }
         }
 

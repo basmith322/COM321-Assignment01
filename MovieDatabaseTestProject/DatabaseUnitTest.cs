@@ -29,13 +29,13 @@ namespace MovieDatabaseTestProject
         [TestMethod]
         public void TestStoreAndLoad()
         {
-            int numMoviesBeforeSave = db.Count;
+            int numMoviesBeforeSave = db.Count();
             db.Save("movies.json");
             db.clear();
             db.Load("movies.json");
             db.First();
             // verify same number of movies loaded
-            Assert.AreEqual(numMoviesBeforeSave, db.Count);
+            Assert.AreEqual(numMoviesBeforeSave, db.Count());
 
             // verify first movie still found
             Assert.AreEqual(m1.Title, db.Get().Title);
@@ -55,7 +55,7 @@ namespace MovieDatabaseTestProject
         {
             db.clear();
             db.Add(m1);
-            Assert.AreEqual(1, db.Count);
+            Assert.AreEqual(1, db.Count());
             Assert.AreEqual(m1.Title, db.Get().Title);
         }
 

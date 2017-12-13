@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Assignment1.Models
 {
-    public enum Genre { Comedy, Action, Horror, Romance, SciFi, Western, Family, Thriller, War }
 
     public class Movie
     {
         #region GettersAndSetters
         //Getters and Setters for movie
+        public enum Genre { Comedy, Action, Horror, Romance, SciFi, Western, Family, Thriller, War }
         public string Title { get; set; }
         public int Year { get; set; }
         public string Director { get; set; }
