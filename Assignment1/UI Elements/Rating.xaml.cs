@@ -25,7 +25,7 @@ namespace Assignment1
             InitializeComponent();
         }
 
-        public int MovieRating
+        public int RatingSelected
         {
             get
             {

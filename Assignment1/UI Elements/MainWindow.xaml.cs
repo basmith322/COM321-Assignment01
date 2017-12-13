@@ -22,10 +22,65 @@ namespace Assignment1
     {
         public Database db;
 
+        private Movie movieDb;
+
+        #region MVVM Updaters
+
+        private void UpdateModelFromUI()
+        {
+
+            movieDb.Title = txtTitle.Text;
+            movieDb.Year = Convert.ToInt32(txtYear.Text);
+            movieDb.Director = txtDirector.Text;
+            movieDb.Duration = Convert.ToInt32(txtDuration.Text);
+            movieDb.Budget = Convert.ToInt32(txtBudget.Text);
+            movieDb.Rating = Convert.ToInt32(RatingSelector.RatingSelected);
+            movieDb.PosterURL = txtMoviePosterUrl.Text;
+            movieDb.Actors.Add(txtCast.Text);
+            movieDb.Genres = GenreSelector.GenreSelected;
+
+            //db.Get().Title = txtTitle.Text;
+            //db.Get().Year = Convert.ToInt32(txtYear.Text);
+            //db.Get().Director = txtDirector.Text;
+            //db.Get().Duration = Convert.ToInt32(txtDuration.Text);
+            //db.Get().Budget = Convert.ToDouble(txtDuration.Text);
+            //db.Get().PosterURL = txtMoviePosterUrl.Text;
+
+            //NEEDS FIXED- NEED TO DO RATINGS GENRE AND ACTORS
+            // actors
+            //db.Get().Genres = Genre.GenreSelected;
+            //db.Get().Rating =   Rating.MovieRating.RatingValue;
+        }
+
+
+        private void UpdateUIFromModel()
+        {
+            txtTitle.Text = movieDb.Title;
+            txtYear.Text = movieDb.Year.ToString();
+            txtDirector.Text = movieDb.Director;
+            txtDuration.Text = movieDb.Duration.ToString();
+            txtBudget.Text = movieDb.Budget.ToString();
+            RatingSelector.RatingSelected = movieDb.Rating;
+            txtMoviePosterUrl.Text = movieDb.PosterURL;
+            txtCast.Text = string.Join(" ", Cast);
+            GenreSelector.GenreSelected = movieDb.Genres;
+
+        }
+
+        private void UpdateNavigation()
+        {
+
+        }
+        #endregion
+
         #region MainWindow
         public MainWindow()
         {
             InitializeComponent();
+
+            movieDb = new Movie();
+
+            UpdateUIFromModel();
 
         }
         #endregion
@@ -33,7 +88,7 @@ namespace Assignment1
         #region FileMenuButtons
         private void FileMenuNew_Click(object sender, RoutedEventArgs e)
         {
-            db.clear();
+            movieDb = new Movie();
         }
 
         private void FileMenuOpen_Click(object sender, RoutedEventArgs e)
@@ -119,42 +174,8 @@ namespace Assignment1
         }
         #endregion
 
-        #region MVVM Updaters
-        void UpdateModelFromUI()
-        {
-            db.Get().Title = txtTitle.Text;
-            db.Get().Year = Convert.ToInt32(txtYear.Text);
-            db.Get().Director = txtDirector.Text;
-            db.Get().Duration = Convert.ToInt32(txtDuration.Text);
-            db.Get().Budget = Convert.ToDouble(txtDuration.Text);
-            db.Get().PosterURL = txtMoviePosterUrl.Text;
-
-            //NEEDS FIXED- NEED TO DO RATINGS GENRE AND ACTORS
-            // actors
-            //db.Get().Genres = Genre.GenreSelected;
-            //db.Get().Rating =   Rating.MovieRating.RatingValue;
-        }
-
-
-        void UpdateUIFromModel()
-        {
-            txtTitle.Text = db.Get().Title;
-            txtYear.Text = db.Get().Year.ToString();
-            txtDirector.Text = db.Get().Duration.ToString();
-            txtBudget.Text = db.Get().Budget.ToString();
-
-            //NEED TO DO RATING, GENRE AND ACTORS
-
-        }
-
-        private void UpdateNavigation()
-        {
-
-        }
-        #endregion
-
         #region WindowModes
-        enum WindowMode { Browse, Create, Edit }
+        //enum WindowMode { Browse, Create, Edit }
         void BrowseMode()
         {
             btnFirst.Visibility = Visibility.Visible;
@@ -269,6 +290,7 @@ namespace Assignment1
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             UpdateModelFromUI();
+            BrowseMode();
         }
         #endregion
 
