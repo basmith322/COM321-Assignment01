@@ -62,3 +62,5 @@ C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\ob
 C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.csproj.CoreCompileInputs.cache
 C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.exe
 C:\Users\basmi\Documents\GitHub\C#Ass1\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.pdb
+C:\Users\peter\Desktop\Documents\Lenovo Yoga\GitKracken\Visual Assignment\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.exe
+C:\Users\peter\Desktop\Documents\Lenovo Yoga\GitKracken\Visual Assignment\COM321-Visual-Programming-\Assignment1\obj\Debug\Assignment1.pdb
