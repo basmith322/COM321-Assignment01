@@ -20,9 +20,23 @@ namespace Assignment1
 
     public partial class MainWindow : Window
     {
-        public Database db;
+        private Database db;
 
         private Movie movieDb;
+
+        #region MainWindow
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            db = new Database();
+
+            movieDb = new Movie();
+
+            UpdateUIFromModel();
+
+        }
+        #endregion
 
         #region MVVM Updaters
 
@@ -64,23 +78,10 @@ namespace Assignment1
             txtMoviePosterUrl.Text = movieDb.PosterURL;
             txtCast.Text = string.Join(" ", Cast);
             GenreSelector.GenreSelected = movieDb.Genres;
-
         }
 
         private void UpdateNavigation()
         {
-
-        }
-        #endregion
-
-        #region MainWindow
-        public MainWindow()
-        {
-            InitializeComponent();
-
-            movieDb = new Movie();
-
-            UpdateUIFromModel();
 
         }
         #endregion
