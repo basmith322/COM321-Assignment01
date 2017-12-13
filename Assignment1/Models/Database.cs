@@ -21,23 +21,17 @@ namespace Assignment1.Models
         }
 
         // A property to Return number of movies in the database
-        public int Count
-        {
-            get
-            {
+        public int Count()
+        { 
                 return db.Count;
-            }
         }
 
         // A property to return  current _index position which should be either
         // -1 if database is empty
         // 0 - db.Count-1 if database is not empty
-        public int Index
+        public int Index()
         {
-            get
-            {
                 return _index;
-            }
         }
         #endregion
 
@@ -45,8 +39,8 @@ namespace Assignment1.Models
         // Add a movie to current position in database
         public void Add(Movie m)
         {
-            db.Add(m);
             _index++;
+            db.Insert(_index, m);
         }
 
         // Return current movie or null if database empty
@@ -54,34 +48,41 @@ namespace Assignment1.Models
         {
             if (db.Count > 0)
             {
-                return db[_index];
+                return db.ElementAt(_index);
             }
-
-            return null;
+            else
+            {
+                return null;
+            }
         }
 
         // Delete current movie at index if there is a movie and update index 
         public void Delete()
         {
-            db.RemoveAt(_index);
-            _index--;
+            if (_index <= db.Count())
+            {
+                db.RemoveAt(_index);
+                _index--;
+            }
+            
+            if (_index == -1 && db.Count > 0)
+            {
+                _index = 0;
+            }
         }
 
         // Update the current movie at index if there is a movie and update index
         public void Update(Movie m)
         {
-            //if (_index > -1)
-            if (db.Count > 0)
-            {
-                db[_index] = m;
-            }
+            db.RemoveAt(_index);
+            db.Insert(_index, m);
         }
 
         // Delete all movies from the database and reset index
         public void clear()
         {
             db.Clear();
-            _index = -1;
+            _index = 0;
         }
         #endregion
 
@@ -90,26 +91,30 @@ namespace Assignment1.Models
         // return true if index update was possible, false otherwise
         public bool First()
         {
-            if (db.Count > 0)
+            if (_index != 0)
             {
                 _index = 0;
                 return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         // Move index position to next movie
         // true if index update was possible, false otherwise<
         public bool Next()
         {
-            if (_index < db.Count - 1)
+            if (_index < db.Count() - 1)
             {
                 _index++;
                 return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         // Move index position to previous movie
@@ -121,8 +126,10 @@ namespace Assignment1.Models
                 _index--;
                 return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
         // Move index position to last movie
         // true if index update was possible, false otherwise</returns>
@@ -130,13 +137,15 @@ namespace Assignment1.Models
         {
             //_index = db.Count - 1;
 
-            if (db.Count > 0)
+            if (_index < (db.Count() - 1))
             {
                 _index = db.Count - 1;
                 return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         #endregion
@@ -144,18 +153,16 @@ namespace Assignment1.Models
         #region LoadSaveFunctions
         // Load movies from a json file and set index to first record
         public void Load(string file)
-        {
-            clear();
-            string json = File.ReadAllText(file);
-            var m = JsonConvert.DeserializeObject<List<Movie>>(json);
-            db = m;
+        { 
+            var json = File.ReadAllText(file);
+            db = JsonConvert.DeserializeObject<List<Movie>>(json);
             _index = 0;
         }
 
         // Save movies to a Json file
         public void Save(string file)
         {
-            var json = JsonConvert.SerializeObject(db);
+            string json = JsonConvert.SerializeObject(db);
             File.WriteAllText(file, json);
         }
         #endregion

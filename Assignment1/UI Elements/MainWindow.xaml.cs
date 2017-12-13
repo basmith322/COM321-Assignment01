@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,63 +22,66 @@ namespace Assignment1
     public partial class MainWindow : Window
     {
         private Database db;
-
-        private Movie movieDb;
+        private Movie movie;
 
         #region MainWindow
         public MainWindow()
         {
             InitializeComponent();
 
+            BrowseMode();
+
             db = new Database();
 
-            movieDb = new Movie();
-
-            UpdateUIFromModel();
-
+            movie = new Movie();
         }
         #endregion
 
         #region MVVM Updaters
 
-        private void UpdateModelFromUI()
+        public void UpdateModelFromUI(Movie movie)
         {
 
-            movieDb.Title = txtTitle.Text;
-            movieDb.Year = Convert.ToInt32(txtYear.Text);
-            movieDb.Director = txtDirector.Text;
-            movieDb.Duration = Convert.ToInt32(txtDuration.Text);
-            movieDb.Budget = Convert.ToInt32(txtBudget.Text);
-            movieDb.Rating = Convert.ToInt32(RatingSelector.RatingSelected);
-            movieDb.PosterURL = txtMoviePosterUrl.Text;
-            movieDb.Actors.Add(txtCast.Text);
-            movieDb.Genres = GenreSelector.GenreSelected;
+            movie.Title = txtTitle.Text;
+            movie.Year = Convert.ToInt32(txtYear.Text);
+            movie.Director = txtDirector.Text;
+            movie.Duration = Convert.ToInt32(txtDuration.Text);
+            movie.Budget = Convert.ToInt32(txtBudget.Text);
+            movie.Rating = Convert.ToInt32(RatingSelector.RatingSelected);
+            movie.PosterURL = txtMoviePosterUrl.Text;
+            movie.Actors.Add(txtCast.Text);
+            movie.Genres = GenreSelector.GenreSelected;
+            movie.Actors = AddActors();
 
-            //db.Get().Title = txtTitle.Text;
-            //db.Get().Year = Convert.ToInt32(txtYear.Text);
-            //db.Get().Director = txtDirector.Text;
-            //db.Get().Duration = Convert.ToInt32(txtDuration.Text);
-            //db.Get().Budget = Convert.ToDouble(txtDuration.Text);
-            //db.Get().PosterURL = txtMoviePosterUrl.Text;
+            db.Update(movie);
 
-            //NEEDS FIXED- NEED TO DO RATINGS GENRE AND ACTORS
-            // actors
-            //db.Get().Genres = Genre.GenreSelected;
-            //db.Get().Rating =   Rating.MovieRating.RatingValue;
         }
 
-
-        private void UpdateUIFromModel()
+        public void UpdateUIFromModel(Movie movie)
         {
-            txtTitle.Text = movieDb.Title;
-            txtYear.Text = movieDb.Year.ToString();
-            txtDirector.Text = movieDb.Director;
-            txtDuration.Text = movieDb.Duration.ToString();
-            txtBudget.Text = movieDb.Budget.ToString();
-            RatingSelector.RatingSelected = movieDb.Rating;
-            txtMoviePosterUrl.Text = movieDb.PosterURL;
-            txtCast.Text = string.Join(" ", Cast);
-            GenreSelector.GenreSelected = movieDb.Genres;
+            if (db.Count() != 0)
+            {
+                txtTitle.Text = db.Get().Title;
+                txtYear.Text = Convert.ToString(db.Get().Year);
+                txtDirector.Text = db.Get().Director;
+                txtDuration.Text = Convert.ToString(db.Get().Duration);
+                txtBudget.Text = Convert.ToString(db.Get().Budget);
+                RatingSelector.RatingSelected = db.Get().Rating;
+                txtMoviePosterUrl.Text = db.Get().PosterURL;
+                GenreSelector.GenreSelected = db.Get().Genres;
+                lstCast.Items.Add(db.Get().Actors);
+
+                var path = txtMoviePosterUrl.Text;
+                try
+                {
+                    var uri = new Uri(path, UriKind.Absolute);
+                    posterImage.Source = new BitmapImage(uri);
+                }
+                catch (UriFormatException e)
+                {
+                    posterImage.Source = null;
+                }
+            }
         }
 
         private void UpdateNavigation()
@@ -89,7 +93,8 @@ namespace Assignment1
         #region FileMenuButtons
         private void FileMenuNew_Click(object sender, RoutedEventArgs e)
         {
-            movieDb = new Movie();
+            movie = new Movie();
+            UpdateUIFromModel(db.Get());
         }
 
         private void FileMenuOpen_Click(object sender, RoutedEventArgs e)
@@ -97,33 +102,31 @@ namespace Assignment1
             var openFile = new OpenFileDialog()
             {
                 Filter = "json files|*.json",
-                Title = "File to open"
+                Title = "File to open",
             };
+
             if (openFile.ShowDialog() == true)
             {
                 var file = openFile.FileName;
                 db.Load(file);
             }
+
+            UpdateUIFromModel(db.Get());
         }
 
         private void FileMenuSave_Click(object sender, RoutedEventArgs e)
         {
+
+            UpdateModelFromUI(db.Get());
             var saveFile = new SaveFileDialog()
             {
                 Filter = "json files|*.json",
-                Title = "...File to save"
+                Title = "...File to save",
             };
             if (saveFile.ShowDialog() == true)
             {
                 var file = saveFile.FileName;
-                if (file != null)
-                {
-                    db.Save(file);
-                }
-                else if (file == null)
-                {
-                    MessageBox.Show("Cannot save an empty file");
-                }
+                db.Save(file);
             }
         }
 
@@ -275,12 +278,13 @@ namespace Assignment1
         #region ModifierButtons
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            PosterImage();
+            lstCast.Items.Add(txtCast.Text);
+            txtCast.Clear();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            UpdateUIFromModel();
+            UpdateUIFromModel(db.Get());
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -290,25 +294,21 @@ namespace Assignment1
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            UpdateModelFromUI();
+            UpdateModelFromUI(db.Get());
             BrowseMode();
+            UpdateUIFromModel(db.Get());
+            
         }
         #endregion
 
         #region Other Functions
-        void PosterImage()
-        {
-            var path = txtMoviePosterUrl.Text;
-            try
-            {
-                var uri = new Uri(path, UriKind.Absolute);
-                posterImage.Source = new BitmapImage(uri);
-            }
-            catch (UriFormatException e)
-            {
-                posterImage.Source = null;
-            }
 
+        public List<string> AddActors()
+        {
+            var actors = new List<string>();
+            actors.Add(txtCast.Text);
+
+            return actors;
         }
 
         public void ClearGenre()

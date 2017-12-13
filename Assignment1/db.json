@@ -1,0 +1,13 @@
+﻿[
+  {
+    "Title": "Pulp Fiction",
+    "Duration": 150,
+    "Year": 1990,
+    "Budget": 25,
+    "Rating":  5 ,
+    "Director": "Tarintino",
+    "Genres": [ 5 ],
+    "Actors": [ "John Travolta" ],
+    "PosterUrl": ""
+  }
+]

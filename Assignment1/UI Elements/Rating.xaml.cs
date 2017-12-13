@@ -30,7 +30,12 @@ namespace Assignment1
             get
             {
                 //determine which radio button is checked and return relevant value
-                var RatingValue = radBtnOne.IsChecked.Value ? 1 : radBtnTwo.IsChecked.Value ? 2 : radBtnThree.IsChecked.Value ? 3 : radBtnFour.IsChecked.Value ? 4 : radBtnFive.IsChecked.Value ? 5 : 0;
+                var RatingValue = radBtnOne.IsChecked.Value ? 1 
+                    : radBtnTwo.IsChecked.Value ? 2 
+                    : radBtnThree.IsChecked.Value ? 3 
+                    : radBtnFour.IsChecked.Value ? 4 
+                    : radBtnFive.IsChecked.Value ? 5 
+                    : 0;
                 return RatingValue;
 
             }
@@ -43,9 +48,7 @@ namespace Assignment1
                 else if (value == 3) radBtnThree.IsChecked = true;
                 else if (value == 4) radBtnFour.IsChecked = true;
                 else if (value == 5) radBtnFive.IsChecked = true;
-
             }
-
         }
 
         //clearing existing radio button selection

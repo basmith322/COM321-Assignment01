@@ -85,7 +85,7 @@
                         <Button x:Name="btnAdd" Content="Add" Margin="3" Visibility="Collapsed" Grid.Column="1" Click="btnAdd_Click"/>
                         <Button x:Name="btnDelete" Content="Delete" Margin="3" Visibility="Collapsed" Grid.Column="2" Click="btnDelete_Click" />
                     </Grid>
-                    <ListBox x:Name="lstCast" Margin="3" IsEnabled="False">
+                    <ListBox x:Name="lstCast" Margin="3" IsEnabled="True">
                         
                     </ListBox>
 
