@@ -1,4 +1,4 @@
-#COM321 Assignment01 - Movie Database
+# COM321 Assignment01 - Movie Database
 
 The following is an application designed to be installed in terminals within a cinema or theatre
 
